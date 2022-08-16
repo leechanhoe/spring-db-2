@@ -5,28 +5,50 @@ import hello.itemservice.repository.ItemSearchCond;
 import hello.itemservice.repository.ItemUpdateDto;
 import hello.itemservice.repository.memory.MemoryItemRepository;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@Transactional
+@SpringBootTest // SpringbootApplication을 찾아내서 그 설정을 사용한다
 class ItemRepositoryTest {
 
     @Autowired
     ItemRepository itemRepository;
 
-    @AfterEach
-    void afterEach() {
-        //MemoryItemRepository 의 경우 제한적으로 사용
-        if (itemRepository instanceof MemoryItemRepository) {
-            ((MemoryItemRepository) itemRepository).clearStore();
-        }
-    }
+//    @Autowired
+//    PlatformTransactionManager transactionManager; // 데이터소스와 트랜매니져는 자동으로 빈등록해줌
+//
+//    TransactionStatus status;
+//
+//    @BeforeEach
+//    void beforeEach() {
+//        //트랜잭션 시작
+//        status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+//    }
+//
+//    @AfterEach
+//    void afterEach() {
+//        //MemoryItemRepository 의 경우 제한적으로 사용
+//        if (itemRepository instanceof MemoryItemRepository) {
+//            ((MemoryItemRepository) itemRepository).clearStore();
+//        }
+//        //트랜잭션 롤백
+//        transactionManager.rollback(status);
+//    }
 
+//    @Commit 기본은 롤백이지만 커밋해줌
+//    @Transactional
     @Test
     void save() {
         //given

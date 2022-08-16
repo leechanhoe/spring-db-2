@@ -3,3 +3,5 @@
 *.bat
 *.jar
 itemservice-db/gradle/wrapper/gradle-wrapper.jar
+*.xml
+*.iml
