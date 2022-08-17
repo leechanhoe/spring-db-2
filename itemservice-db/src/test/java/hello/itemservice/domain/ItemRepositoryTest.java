@@ -19,7 +19,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Transactional
+@Transactional // 이게 제일 중요
 @SpringBootTest // SpringbootApplication을 찾아내서 그 설정을 사용한다
 class ItemRepositoryTest {
 
